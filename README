@@ -4,6 +4,11 @@ The Implementation Factory is a hobby project of mine where I attempt to re-impl
 library functions, data structure, and algorithm functionality on my own. The project will
 be using several different languages, most prominently C and Python.
 
-I plan for all of the different files to be able to be run alone with little to
-no dependencies, so people can download them individually and play around with them 
-if they wish!
+I plan for the project to be able to be run alone with little to
+no external dependencies, so people can download the project and play around with them 
+if they wish! (Although this may change in the future, but I will try and avoid the use
+of extra library downloads.)
+
+C/C++ files were compiled using Clang and GCC.
+Python files were run piled using the latest Python releases.
+Java files were run using Eclipse
