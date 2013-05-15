@@ -8,3 +8,15 @@
 ImplementationFactoy.bbprojectd/Scratchpad.txt
 
 .DS_Store
+
+functions/makefile
+
+*.pyc
+
+functions/tester.c
+
+*.plist
+
+functions/test.dSYM/Contents/Resources/DWARF/test
+
+functions/test

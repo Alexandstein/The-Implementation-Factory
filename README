@@ -1,4 +1,4 @@
-==THE IMPLEMENTATION FACTORY==
+============THE IMPLEMENTATION FACTORY===========
 
 The Implementation Factory is a hobby project of mine where I attempt to re-implement
 library functions, data structure, and algorithm functionality on my own. The project will
@@ -12,3 +12,12 @@ of extra library downloads.)
 C/C++ files were compiled using Clang and GCC.
 Python files were run piled using the latest Python releases.
 Java files were run using Eclipse
+
+===CONTENTS===
+algorithms
+-quicksort.py
+
+data_structures
+
+
+functions
