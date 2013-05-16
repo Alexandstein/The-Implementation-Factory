@@ -1,6 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "utilities.h"
+#include "functionHeaders.h"
+
+/**/
 
 
 /*Checks the length of the input string						*/
