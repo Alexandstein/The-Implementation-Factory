@@ -63,56 +63,73 @@ void Node_free(Node* toDelete)
 }
 
 /*Linked List FUNCTIONS*/
-/*Constructor for Linked List. Takes a head node as input*/
-LinkedList* LinkedList_init(Node* head)
+/*TODO Constructor for Linked List.*/
+LinkedList* LinkedList_init()
 {
 	LinkedList* output = (LinkedList*)malloc(sizeof(LinkedList));
-	output->head = head;
-	output->cursor = head;
+	output->head = NULL;
+	output->cursor = NULL;
 	
 	return output;
 }
 
+/*Checks if list is empty*/
+int LinkedList_isEmpty(LinkedList list){
+	if(list->head == NULL){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 /*Pushes new Node to replace the head.*/
-void LinkedList_pushFromHead(LinkedList* list, Node* input)
+void LinkedList_pushFromHead(LinkedList* list, void* input)
 {	
-	Node_append(input, list->head);					//Link Nodes together
+	Node* toPush = Node_initWithInput(input);
+
+	Node_append(toPush, list->head);				//Link Nodes together
 
 	list->head = input;								//Replace the head with new Node
 	return;
 }
 
-/*Pops off from head*/
-Node* LinkedList_popFromHead(LinkedList* list)
+/*TODO Pops off from head*/
+void* LinkedList_popFromHead(LinkedList* list)
 {
+	void* output;
+	Node* toDelete;
+	
 	if(list->cursor == list->head){
 		LinkedList_next(list);						//If cursor is on head, advance one.	
 	}
-
-	Node* output = list->head;
+	
+	toDelete = list->head;
+	output = Node_getData(toDelete);
 	list->head = Node_getNext(list->head);
 	//TODO Deal with Cursor Pointers.
+	free(toDelete);
 	return output;
 }
 
 /*Pushes Node onto tail*/
-void LinkedList_pushFromTail(LinkedList* list, Node* input)
+void LinkedList_pushFromTail(LinkedList* list, void* input)
 {
 	Node* temp = list->cursor;						//Save cursor location
+	Node* toPush = Node_initWithInput(input);
 	
 	while(LinkedList_isNext(list)){ 				//Iterate to end of list
 		LinkedList_next(list);
 	}
-	Node_append(list->cursor, input);
+	Node_append(list->cursor, toPush);
 	
 	list->cursor = temp;							//Return cursor location
 	return;
 }
 
-/*Pops Node from tail*/
-Node* LinkedList_popFromTail(LinkedList* list)
+/*TODO Pops Node from tail*/
+void* LinkedList_popFromTail(LinkedList* list)
 {
-	Node* beforeNext;								//Keep track of node before cursor
+	Node* beforeNext = NULL;						//Keep track of node before cursor
 	Node* temp = list->cursor;						//Store user's cursor location.
 	Node* output;
 	
@@ -121,13 +138,13 @@ Node* LinkedList_popFromTail(LinkedList* list)
 		LinkedList_next(list);
 	}
 	output = list->cursor;
-	beforeNext->next = NULL;					//Sever connection
+	beforeNext->next = NULL;						//Sever connection
 	
 	if(output == temp){
-		temp = list->head;						//If cursor is on tail, set on head.	
+		temp = list->head;							//If cursor is on tail, set on head.	
 	}
 	
-	list->cursor = temp;						//Return cursor
+	list->cursor = temp;							//Return cursor
 	return output;	
 }
 

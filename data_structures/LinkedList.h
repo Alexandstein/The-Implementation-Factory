@@ -37,20 +37,23 @@ Node* Node_append(Node* parent, Node* child);
 void Node_free(Node* toDelete);
 
 /*Linked List FUNCTIONS*/
-/*Constructor for Linked List. Takes a head node as input*/
-LinkedList* LinkedList_init(Node* head);
+/*Constructor for Linked List.*/
+LinkedList* LinkedList_init();
+
+/*Checks if list is empty*/
+int LinkedList_isEmpty(LinkedList list);
 
 /*Pushes new Node to replace the head.*/
-void LinkedList_pushFromHead(LinkedList* list, Node* input);
+void LinkedList_pushFromHead(LinkedList* list, void* input);
 
 /*Pops off from head*/
-Node* LinkedList_popFromHead(LinkedList* list);
+void* LinkedList_popFromHead(LinkedList* list);
 
 /*Pushes Node onto tail*/
-void LinkedList_pushFromTail(LinkedList* list, Node* input);
+void LinkedList_pushFromTail(LinkedList* list, void* input);
 
 /*Pops Node from tail*/
-Node* LinkedList_popFromTail(LinkedList* list);
+void* LinkedList_popFromTail(LinkedList* list);
 
 /*Resets the cursor*/
 void LinkedList_resetCursor(LinkedList* list);
