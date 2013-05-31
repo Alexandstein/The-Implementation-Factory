@@ -41,7 +41,7 @@ void Node_free(Node* toDelete);
 LinkedList* LinkedList_init();
 
 /*Checks if list is empty*/
-int LinkedList_isEmpty(LinkedList list);
+int LinkedList_isEmpty(LinkedList* list);
 
 /*Pushes new Node to replace the head.*/
 void LinkedList_pushFromHead(LinkedList* list, void* input);

@@ -74,7 +74,7 @@ LinkedList* LinkedList_init()
 }
 
 /*Checks if list is empty*/
-int LinkedList_isEmpty(LinkedList list){
+int LinkedList_isEmpty(LinkedList* list){
 	if(list->head == NULL){
 		return 1;
 	}else{
