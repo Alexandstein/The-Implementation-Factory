@@ -10,7 +10,7 @@ if they wish! (Although this may change in the future, but I will try and avoid 
 of extra library downloads.)
 
 C/C++ files were compiled using Clang and GCC.
-Python files were run piled using the latest Python releases.
+Python files were run using the latest Python releases.
 Java files were run using Eclipse
 
 ===CONTENTS===
@@ -18,6 +18,9 @@ algorithms
 -quicksort.py
 
 data_structures
-#TODO Still deciding on format
+-LinkedList.c
+-LinkedList.h
 
 functions
+-functions.c
+-functions.h
