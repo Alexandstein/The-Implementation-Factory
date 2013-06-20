@@ -22,3 +22,5 @@ functions/test.dSYM/Contents/Resources/DWARF/test
 functions/test
 
 data_structures/tester.c
+
+*.out
