@@ -144,9 +144,9 @@ void LinkedList_pushFromTail(LinkedList* list, void* input)
 /*TODO Pops Node from tail*/
 void* LinkedList_popFromTail(LinkedList* list)
 {
-	Node* beforeNext = NULL;						//Keep track of node before cursor
-	Node* temp = list->cursor;						//Store user's cursor location.
-	Node* output;
+	Node* temp = list->cursor;							//Store user's cursor location.
+	Node* beforeNext = NULL;							//Keep track of node before cursor
+	void* output;
 	
 	if(LinkedList_isEmpty(list)){						//Check if list is empty
 		return NULL;									//Empty; return NULL
@@ -155,14 +155,19 @@ void* LinkedList_popFromTail(LinkedList* list)
 			beforeNext = list->cursor;
 			LinkedList_next(list);
 		}
-		output = list->cursor;
-		beforeNext->next = NULL;						//Sever connection
-	
+		output = list->cursor->data;
+		if(beforeNext){									//beforeNext is not NULL
+			beforeNext->next = NULL;					//Sever connection
+		}else{
+			list->cursor = NULL;						//Else, set cursor to NULL
+			list->head	 = NULL;
+		}
 		if(output == temp){
 			temp = list->head;							//If cursor is on tail, set on head.	
 		}
-	
 		list->cursor = temp;							//Return cursor
+		LinkedList_resetCursor(list);					//TODO DEBUG. Keep, maybe?
+
 		return output;	
 	}
 }
