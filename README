@@ -24,3 +24,28 @@ data_structures
 functions
 -functions.c
 -functions.h
+
+===Documentation templates===
+C family
+/*//////////////////////////////////////////////////////////////////////////*/
+/*TYPE: 																	*/
+/*		FUNCTION NAME										  				*/
+/*DESCRIPTION																*/
+/*																			*/
+/*Args: 																	*/
+/*		ARG 0:																*/
+/*			DESCRIPTION														*/
+/*		ARG 1:																*/
+/*			DESCRIPTION														*/
+/*		ARG n:																*/
+/*			DESCRIPTION														*/
+/*Except:																	*/
+/*		Exception 0:														*/
+/*			DESCRIPTION														*/
+/*		Exception 1:														*/
+/*			DESCRIPTION														*/
+/*		Exception n:														*/
+/*			DESCRIPTION														*/
+/*Return:																	*/
+/*		DESCRIPTION															*/
+/*//////////////////////////////////////////////////////////////////////////*/

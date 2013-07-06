@@ -2,8 +2,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/*Node FUNCTIONS*/
-/*Constructor creates empty Node*/
+/*************NODE FUNCTIONS****************/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*CONSTRUCTOR: 																*/
+/*		Node* Node_init										  				*/
+/*Constructs an empty Node													*/
+/*																			*/
+/*Args: 																	*/
+/*		void			:													*/
+/*Return:																	*/
+/*		Pointer to the new Node												*/
+/*//////////////////////////////////////////////////////////////////////////*/
 Node* Node_init()
 {
 	Node* output = (Node*)malloc(sizeof(Node));		//Allocate memory
@@ -14,7 +23,17 @@ Node* Node_init()
 	return output;
 }
 
-/*Constructor creates list with initial data input*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*CONSTRUCTOR: 																*/
+/*		Node* Node_initWithInput							  				*/
+/*Constructs an initialized Node											*/
+/*																			*/
+/*Args: 																	*/
+/*		void* input:														*/
+/*			Pointer to data to use as input									*/
+/*Return:																	*/
+/*		Pointer to the new Node												*/
+/*//////////////////////////////////////////////////////////////////////////*/
 Node* Node_initWithInput(void* input)
 {
 	Node* output = (Node*)malloc(sizeof(Node));		//Allocate memory
@@ -26,12 +45,35 @@ Node* Node_initWithInput(void* input)
 }
 
 /*Retrieves and returns the data contained in a node*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void* Node_getData									  				*/
+/*Retrieves data from Node_init												*/
+/*																			*/
+/*Args: 																	*/
+/*		Node* dataSource:													*/
+/*			Pointer to Node to retrieve from								*/
+/*Return:																	*/
+/*		Pointer to the data													*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void* Node_getData(Node* dataSource)
 {
 	return dataSource->data;						//Return data
 }
 
-/*Sets the data for a node*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		Node *Node_setData										  				*/
+/*Sets the data for a node													*/
+/*																			*/
+/*Args: 																	*/
+/*		Node* dataTarget:													*/
+/*			Pointer to Node to receive the data								*/
+/*		void* input:														*/
+/*			Data to be set in `dataTarget`									*/
+/*Return:																	*/
+/*		Pointer to target node												*/
+/*//////////////////////////////////////////////////////////////////////////*/
 Node* Node_setData(Node* dataTarget, void* input)
 {
 	dataTarget->data = input;
@@ -39,20 +81,52 @@ Node* Node_setData(Node* dataTarget, void* input)
 	return dataTarget;
 }
 
-/*Get in the next node*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		Node* Node_getNext										  				*/
+/*Retrieve Node stored in `next` pointer									*/
+/*																			*/
+/*Args: 																	*/
+/*		Node* node:															*/
+/*			Node to retrieve next from										*/
+/*Return:																	*/
+/*		Pointer to next Node, or NULL if there is no next Node				*/
+/*//////////////////////////////////////////////////////////////////////////*/
 Node* Node_getNext(Node* node)
 {
 	return node->next;
 }
 
-/*Attaches child as the 'next' variable for parent.*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		Node* Node_setData										  			*/
+/*Attaches child Node as the 'next' variable for parent						*/
+/*																			*/
+/*Args: 																	*/
+/*		Node* parent:														*/
+/*			Node who's `next` variable will be set to `child`				*/
+/*		Node* child:														*/
+/*			Target for parent's `next` variable								*/
+/*Return:																	*/
+/*		Pointer to `parent`													*/
+/*//////////////////////////////////////////////////////////////////////////*/
 Node* Node_append(Node* parent, Node* child)
 {
 	parent->next = child;
 	return parent;
 }
 
-/*Deletes Node*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*DESTRUCTOR: 																*/
+/*		void Node_free										  				*/
+/*Frees a Node from memory													*/
+/*																			*/
+/*Args: 																	*/
+/*		Node* toDelete:														*/
+/*			Node to delete													*/
+/*Return:																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void Node_free(Node* toDelete)
 {
 	toDelete->next = NULL;
@@ -63,8 +137,16 @@ void Node_free(Node* toDelete)
 	return;
 }
 
-/*Linked List FUNCTIONS*/
-/*TODO Constructor for Linked List.*/
+/**************LINKED LIST FUNCTIONS***************/
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*CONSTRUCTOR: LinkedList* LinkedList_init					  				*/
+/*Constructor for LinkedList struct.										*/
+/*Args: 																	*/
+/*		void																*/
+/*Return:																	*/
+/*		Initiated LinkedList struct											*/
+/*//////////////////////////////////////////////////////////////////////////*/
 LinkedList* LinkedList_init()
 {
 	LinkedList* output = (LinkedList*)malloc(sizeof(LinkedList));
@@ -74,7 +156,16 @@ LinkedList* LinkedList_init()
 	return output;
 }
 
-/*Checks if list is empty*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: int LinkedList_isEmpty							  				*/
+/*Checks if list is empty													*/
+/*																			*/
+/*Args: 																	*/
+/*		LinkedList* list													*/
+/*			The list to be checked											*/
+/*Return:																	*/
+/*		1 (true) if empty, 0 (false) if not empty							*/
+/*//////////////////////////////////////////////////////////////////////////*/
 int LinkedList_isEmpty(LinkedList* list){
 	if(list->head == NULL){
 		return 1;
@@ -83,7 +174,19 @@ int LinkedList_isEmpty(LinkedList* list){
 	}
 }
 
-/*Pushes new Node to replace the head.*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void LinkedList_pushFromHead					  					*/
+/*DESCRIPTION																*/
+/*		Pushes data from the head of the list								*/
+/*Args: 																	*/
+/*		LinkedList* list:													*/
+/*			The receiving list												*/
+/*		void* input:														*/
+/*			The data to be pushed onto `list`								*/
+/*Return:																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void LinkedList_pushFromHead(LinkedList* list, void* input)
 {	
 	Node* toPush = Node_initWithInput(input);
@@ -99,7 +202,17 @@ void LinkedList_pushFromHead(LinkedList* list, void* input)
 	}
 }
 
-/*TODO Pops off from head*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void* LinkedList_popFromHead						  				*/
+/*Pops data off from the head												*/
+/*																			*/
+/*Args: 																	*/
+/*		LInkedList* list:													*/
+/*			LinkedList to pop from											*/
+/*Return:																	*/
+/*		Returns the popped data												*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void* LinkedList_popFromHead(LinkedList* list)
 {
 	void* output;
@@ -116,12 +229,26 @@ void* LinkedList_popFromHead(LinkedList* list)
 		output = Node_getData(toDelete);
 		list->head = Node_getNext(list->head);
 		//TODO Deal with Cursor Pointers.
-		free(toDelete);
+		LinkedList_resetCursor(list);					//Set head to beginning.
+		
+		Node_free(toDelete);
 		return output;
 	}
 }
 
-/*Pushes Node onto tail*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void LinkedList_pushFromTail					  					*/
+/*DESCRIPTION																*/
+/*		Pushes data from the tail of the list								*/
+/*Args: 																	*/
+/*		LinkedList* list:													*/
+/*			The receiving list												*/
+/*		void* input:														*/
+/*			The data to be pushed onto `list`								*/
+/*Return:																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void LinkedList_pushFromTail(LinkedList* list, void* input)
 {
 	Node* temp = list->cursor;							//Save cursor location
@@ -141,11 +268,20 @@ void LinkedList_pushFromTail(LinkedList* list, void* input)
 	}
 }
 
-/*TODO Pops Node from tail*/
-void* LinkedList_popFromTail(LinkedList* list)
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void* LinkedList_popFromTail						  				*/
+/*Dequeues data from tail													*/
+/*																			*/
+/*Args: 																	*/
+/*		LInkedList* list:													*/
+/*			LinkedList to pop from											*/
+/*Return:																	*/
+/*		Returns the popped data												*/
+/*//////////////////////////////////////////////////////////////////////////*/void* LinkedList_popFromTail(LinkedList* list)
 {
-	Node* temp = list->cursor;							//Store user's cursor location.
 	Node* beforeNext = NULL;							//Keep track of node before cursor
+	Node* toDelete;										//Remember to free memory!
 	void* output;
 	
 	if(LinkedList_isEmpty(list)){						//Check if list is empty
@@ -156,30 +292,49 @@ void* LinkedList_popFromTail(LinkedList* list)
 			LinkedList_next(list);
 		}
 		output = list->cursor->data;
+		toDelete = list->cursor;
 		if(beforeNext){									//beforeNext is not NULL
 			beforeNext->next = NULL;					//Sever connection
 		}else{
 			list->cursor = NULL;						//Else, set cursor to NULL
 			list->head	 = NULL;
 		}
-		if(output == temp){
-			temp = list->head;							//If cursor is on tail, set on head.	
-		}
-		list->cursor = temp;							//Return cursor
-		LinkedList_resetCursor(list);					//TODO DEBUG. Keep, maybe?
 
+		LinkedList_resetCursor(list);					//Reset cursor.
+
+		Node_free(toDelete);							//Clean up
 		return output;	
 	}
 }
 
-/*Resets the cursor*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void LinkedList_resetCursor							  				*/
+/*Resets `list->cursor` to the head of the list								*/
+/*																			*/
+/*Args: 																	*/
+/*		LInkedList* list:													*/
+/*			LinkedList to manipulate										*/
+/*Return:																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void LinkedList_resetCursor(LinkedList* list)
 {
 	list->cursor = list->head;
 	return;
 }
 
-/*Advance the cursor and return the data value.*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void* LinkedList_next								  				*/
+/*Advance the cursor and return the data value								*/
+/*																			*/
+/*Args: 																	*/
+/*		LInkedList* list:													*/
+/*			LinkedList to manipulate										*/
+/*Return:																	*/
+/*		Returns the data of the passed over node							*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void* LinkedList_next(LinkedList* list)
 {
 	if(list->cursor == NULL){
@@ -192,7 +347,17 @@ void* LinkedList_next(LinkedList* list)
 	return output;
 }
 
-/*Returns true if there is a next Node, false if tail or NULL.*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		int LinkedList_isNext								  				*/
+/*Checks whether there exists a next node 									*/
+/*																			*/
+/*Args: 																	*/
+/*		LInkedList* list:													*/
+/*			LinkedList to check												*/
+/*Return:																	*/
+/*		1 if there is a next node. 0 otherwise								*/
+/*//////////////////////////////////////////////////////////////////////////*/
 int LinkedList_isNext(LinkedList* list)
 {
 	if(list == NULL || Node_getNext(list->cursor) == NULL){
@@ -201,7 +366,17 @@ int LinkedList_isNext(LinkedList* list)
 		return 1;
 }
 
-/*Deletes the linked list from memory*/
+/*//////////////////////////////////////////////////////////////////////////*/
+/*DESTRUCTOR: 																*/
+/*		void LinkedList_free								  				*/
+/*Frees a LinkedList from memory											*/
+/*																			*/
+/*Args: 																	*/
+/*		LInkedList* list:													*/
+/*			LinkedList to delete											*/
+/*Return:																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
 void LinkedList_free(LinkedList* list)
 {
 	while(list->cursor != NULL){			//Keep iterating through to delete all nodes.
