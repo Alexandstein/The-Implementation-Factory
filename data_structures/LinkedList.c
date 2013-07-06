@@ -1,6 +1,5 @@
 #include "LinkedList.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /*************NODE FUNCTIONS****************/
 /*//////////////////////////////////////////////////////////////////////////*/
@@ -63,7 +62,7 @@ void* Node_getData(Node* dataSource)
 
 /*//////////////////////////////////////////////////////////////////////////*/
 /*FUNCTION: 																*/
-/*		Node *Node_setData										  				*/
+/*		Node *Node_setData										  			*/
 /*Sets the data for a node													*/
 /*																			*/
 /*Args: 																	*/
@@ -83,7 +82,7 @@ Node* Node_setData(Node* dataTarget, void* input)
 
 /*//////////////////////////////////////////////////////////////////////////*/
 /*FUNCTION: 																*/
-/*		Node* Node_getNext										  				*/
+/*		Node* Node_getNext										  			*/
 /*Retrieve Node stored in `next` pointer									*/
 /*																			*/
 /*Args: 																	*/
@@ -278,7 +277,8 @@ void LinkedList_pushFromTail(LinkedList* list, void* input)
 /*			LinkedList to pop from											*/
 /*Return:																	*/
 /*		Returns the popped data												*/
-/*//////////////////////////////////////////////////////////////////////////*/void* LinkedList_popFromTail(LinkedList* list)
+/*//////////////////////////////////////////////////////////////////////////*/
+void* LinkedList_popFromTail(LinkedList* list)
 {
 	Node* beforeNext = NULL;							//Keep track of node before cursor
 	Node* toDelete;										//Remember to free memory!
