@@ -32,7 +32,7 @@ class Node
 		Node(K key, T data, Node* next);
 		
 		T getData();
-		void setData();
+		void setData(K key, T data);
 		void setChildren(Node<K,T>* left, Node<K,T>* right);
 		void setLeft(Node<K,T>* left);
 		void setRight(Node<K,T>* right);
@@ -73,4 +73,56 @@ class BinaryTree
 		T*  toArray(int ordering);
 		K*	toKeyArray(int ordering);
 };
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////IMPLEMENTATION//////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+///////////////////////////////////////NODE///////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*CONSTRUCTOR: 																*/
+/*		Node()												  				*/
+/*No arg constructor for Node class. Initializes all members to NULL.		*/
+/*																			*/
+/*Args: 																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
+template <typename K, typename T>
+Node<K,T>::Node()
+{
+	this->key 	= 0;
+	this->value	= 0;
+	this->left	= nullptr;
+	this->right	= nullptr;
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*CONSTRUCTOR: 																*/
+/*		FUNCTION NAME										  				*/
+/*DESCRIPTION																*/
+/*																			*/
+/*Args: 																	*/
+/*		ARG 0:																*/
+/*			DESCRIPTION														*/
+/*		ARG 1:																*/
+/*			DESCRIPTION														*/
+/*		ARG n:																*/
+/*			DESCRIPTION														*/
+/*Except:																	*/
+/*		Exception 0:														*/
+/*			DESCRIPTION														*/
+/*		Exception 1:														*/
+/*			DESCRIPTION														*/
+/*		Exception n:														*/
+/*			DESCRIPTION														*/
+/*Return:																	*/
+/*		DESCRIPTION															*/
+/*//////////////////////////////////////////////////////////////////////////*/
+
+
+/////////////////////////////////////BINARYTREE///////////////////////////////
+
 #endif
