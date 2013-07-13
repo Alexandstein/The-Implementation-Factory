@@ -74,29 +74,31 @@ class BinaryTree
 		static void _preOrder(Node<K,T>* node);
 		static void _inOrder(Node<K,T>* node);
 		static void _postOrder(Node<K,T>* node);
+		
 	protected:
 		Node<K,T>* root;
 		unsigned int size;
 		
 		void increment();
 		void decrement();
+		Node<K,T>* getRoot() const;
 	public:
 		BinaryTree();
 		~BinaryTree();
 		void append(K* key, T* value, bool replace = true);
 		void deleteEntry(K* key);
-		BinaryTree* balance();
+		void balance();
 		
 		int  getSize() const;
 		bool isEmpty() const;
 		
-		bool isInTree(K searchKey);
-		T	 search(K searchKey);
+		bool isInTree(K searchKey) const;
+		T&	 search(K searchKey) const;
 		
 		void print(int ordering) const;
 		
-		T*  toArray(int ordering) const;
-		K*	toKeyArray(int ordering) const;
+		T*  valuesToArray(int ordering) const;
+		K*	keysToArray(int ordering) const;
 };
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////IMPLEMENTATION//////////////////////////////
@@ -500,6 +502,111 @@ int BinaryTree<K,T>::getSize() const
 }
 
 /*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		bool isEmpty()														*/
+/*DESCRIPTION:																*/
+/*		Shows whether or not a tree is empty								*/
+/*Args: 																	*/
+/*		void																*/
+/*Return:																	*/
+/*		True if empty, else, false											*/
+/*//////////////////////////////////////////////////////////////////////////*/
+template <typename K, typename T>
+bool BinaryTree<K,T>::isEmpty() const
+{
+	if(this->getSize() == 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		bool isInTree(K searchKey)											*/
+/*DESCRIPTION:																*/
+/*		Checks whether key exists											*/
+/*Args: 																	*/
+/*		K searchKey:														*/
+/*			The key to be searched for										*/
+/*Return:																	*/
+/*		True upon finding the key											*/
+/*//////////////////////////////////////////////////////////////////////////*/
+template <typename K, typename T>
+bool BinaryTree<K,T>::isInTree(K searchKey) const
+{
+	Node<K,T>* cursor = this->getRoot();
+	
+	while(cursor != nullptr){	//Function runs until null is reached, terminating with `false`.
+		if(searchKey == cursor->getKey()){	//Key found, return `true`
+			return true;
+		}else if(searchKey < cursor->getKey()){	//Less than; go left
+			cursor = cursor->getLeft();
+		}else{									//Else, go right.
+			cursor = cursor->getRight();
+		}
+	}
+	return false;								//Loop ends without results: `false`.
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		T& search(K searchKey) 												*/
+/*DESCRIPTION:																*/
+/*		Finds key and returns the paired value								*/
+/*Args: 																	*/
+/*		K searchKey:														*/
+/*			The key to be searched for										*/
+/*Return:																	*/
+/*		Value pair for key, or null if not found.							*/
+/*Exception:																*/
+/*		Throws std::exception() if key is not found.						*/
+/*//////////////////////////////////////////////////////////////////////////*/
+template <typename K, typename T>
+T& BinaryTree<K,T>::search(K searchKey) const
+{
+	Node<K,T>* cursor = this->getRoot();
+	
+	while(cursor != nullptr){	//Function runs until null is reached, terminating with `false`.
+		if(searchKey == cursor->getKey()){	//Key found, return `true`
+			return cursor->getValue();
+		}else if(searchKey < cursor->getKey()){	//Less than; go left
+			cursor = cursor->getLeft();
+		}else{									//Else, go right.
+			cursor = cursor->getRight();
+		}
+	}
+	throw exception();								//Loop ends without results:
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		void print(int ordering)											*/
+/*DESCRIPTION:																*/
+/*		Prints the contents of a tree. Ordering is dependent on the int,	*/
+/*		`ordering`:															*/
+/*				ordering < 0: Pre-order										*/
+/*				ordering > 0: Post-order									*/
+/*				ordering = 0: In-order										*/
+/*Args: 																	*/
+/*		void																*/
+/*Return:																	*/
+/*		void																*/
+/*//////////////////////////////////////////////////////////////////////////*/
+template <typename K, typename T>
+void BinaryTree<K,T>::print(int ordering) const
+{
+	if(ordering < 0){
+		BinaryTree::_preOrder(this->getRoot());
+	}else if(ordering > 0){
+		BinaryTree::_inOrder(this->getRoot());
+	}else{
+		BinaryTree::_postOrder(this->getRoot());
+	}
+	cout << endl;
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
 /*HELPER: 																	*/
 /*		void _preOrder(Node<K,T>* node)										*/
 /*		void _inOrder(Node<K,T>* node)										*/
@@ -548,54 +655,6 @@ void BinaryTree<K, T>::_postOrder(Node<K,T>* node)
 	}
 }
 
-
-/*//////////////////////////////////////////////////////////////////////////*/
-/*FUNCTION: 																*/
-/*		void print(int ordering)											*/
-/*DESCRIPTION:																*/
-/*		Prints the contents of a tree. Ordering is dependent on the int,	*/
-/*		`ordering`:															*/
-/*				ordering < 0: Pre-order										*/
-/*				ordering > 0: Post-order									*/
-/*				ordering = 0: In-order										*/
-/*Args: 																	*/
-/*		void																*/
-/*Return:																	*/
-/*		void																*/
-/*//////////////////////////////////////////////////////////////////////////*/
-template <typename K, typename T>
-void BinaryTree<K,T>::print(int ordering) const
-{
-	if(ordering < 0){
-		BinaryTree::_preOrder(this->root);
-	}else if(ordering > 0){
-		BinaryTree::_inOrder(this->root);
-	}else{
-		BinaryTree::_postOrder(this->root);
-	}
-	cout << endl;
-}
-
-/*//////////////////////////////////////////////////////////////////////////*/
-/*FUNCTION: 																*/
-/*		bool isEmpty()														*/
-/*DESCRIPTION:																*/
-/*		Shows whether or not a tree is empty								*/
-/*Args: 																	*/
-/*		void																*/
-/*Return:																	*/
-/*		True if empty, else, false											*/
-/*//////////////////////////////////////////////////////////////////////////*/
-template <typename K, typename T>
-bool BinaryTree<K,T>::isEmpty() const
-{
-	if(this->getSize() == 0){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 /*//////////////////////////////////////////////////////////////////////////*/
 /*FUNCTION: 																*/
 /*		void increment()													*/
@@ -630,5 +689,21 @@ void BinaryTree<K,T>::decrement()
 	}else{
 		return;
 	}
+}
+
+/*//////////////////////////////////////////////////////////////////////////*/
+/*FUNCTION: 																*/
+/*		Node<K,T>* getRoot()												*/
+/*DESCRIPTION:																*/
+/*		Protected/private helper for retrieving root node					*/
+/*Args: 																	*/
+/*		void																*/
+/*Return:																	*/
+/*		Root of tree														*/
+/*//////////////////////////////////////////////////////////////////////////*/
+template <typename K, typename T>
+Node<K,T>* BinaryTree<K,T>::getRoot() const
+{
+	return this->root;
 }
 #endif
