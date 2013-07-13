@@ -26,3 +26,5 @@ data_structures/tester.c
 *.out
 
 data_structures/Cpp_BinaryTree/tester.cpp
+
+data_structures/Cpp_BinaryTree/.bash_profile
